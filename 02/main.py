@@ -2,10 +2,7 @@
 # requires-python = ">=3.13"
 # dependencies = []
 # ///
-import logging
 from pathlib import Path
-
-logger = logging.getLogger(__name__)
 
 
 def load_data(path: Path) -> list[list[int]]:
@@ -38,19 +35,38 @@ def check_report_safe(report: list[int]) -> bool:
     """
     monotonic = check_report_monotonicity(report)
     deltas = check_report_deltas(report)
-    logger.info(f"Report: {report} Monotonic: {monotonic}, Deltas: {deltas}")
     return monotonic and deltas
 
 
-def check_data_file(path: Path) -> None:
+def problem_dampener(report: list[int]) -> bool:
+    """
+    Enable the problem dampener.
+    """
+    for i in range(len(report)):
+        if check_report_safe(report[:i] + report[i + 1 :]):
+            return True
+    return False
+
+
+def check_data_file(path: Path, enable_problem_dampener: bool = False) -> None:
     """
     Check the data from a file.
     """
     data = load_data(path)
-    safety_check = [check_report_safe(report) for report in data]
+
+    if not enable_problem_dampener:
+        safety_check = [check_report_safe(report) for report in data]
+    else:
+        safety_check = [
+            check_report_safe(report) or problem_dampener(report) for report in data
+        ]
+
     print(f"Data: {path} Number of Safe Reports: {sum(safety_check)}")
 
 
 if __name__ == "__main__":
     check_data_file("test_data.txt")
     check_data_file("data.txt")
+
+    check_data_file("test_data.txt", enable_problem_dampener=True)
+    check_data_file("data.txt", enable_problem_dampener=True)
