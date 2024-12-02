@@ -2,10 +2,10 @@
 # requires-python = ">=3.13"
 # dependencies = []
 # ///
-from operator import sub, abs
+from collections import Counter
+from operator import abs, sub
 from pathlib import Path
 from typing import Tuple
-from collections import Counter
 
 
 def load_data(path: Path) -> Tuple[list[int], list[int]]:
