@@ -4,7 +4,6 @@
 # ///
 import logging
 from pathlib import Path
-from venv import logger
 
 logger = logging.getLogger(__name__)
 
