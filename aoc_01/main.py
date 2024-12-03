@@ -64,8 +64,8 @@ def load_and_find_similarity_score(path: Path) -> int:
 
 if __name__ == "__main__":
     path = Path("aoc_01/data.txt")
-    distance = load_and_find_distance(path)
 
+    distance = load_and_find_distance(path)
     print(f"Part 01: Distance for {path} = {distance}")
 
     similarity = load_and_find_similarity_score(path)

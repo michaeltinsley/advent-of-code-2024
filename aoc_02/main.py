@@ -47,7 +47,7 @@ def problem_dampener(report: list[int]) -> bool:
     return False
 
 
-def check_data_file(path: Path, enable_problem_dampener: bool = False) -> None:
+def check_data_file(path: Path, enable_problem_dampener: bool = False) -> int:
     """
     Check the data from a file.
     """
@@ -60,12 +60,14 @@ def check_data_file(path: Path, enable_problem_dampener: bool = False) -> None:
     else:
         safety_check = [is_safe_report(report) for report in data]
 
-    print(f"Data: {path} Number of Safe Reports: {sum(safety_check)}")
+    return sum(safety_check)
 
 
 if __name__ == "__main__":
-    check_data_file("test_data.txt")
-    check_data_file("data.txt")
+    path = Path("aoc_02/data.txt")
 
-    check_data_file("test_data.txt", enable_problem_dampener=True)
-    check_data_file("data.txt", enable_problem_dampener=True)
+    number_safe = check_data_file(path)
+    print(f"Part 01: Data: {path} Number of Safe Reports: {number_safe}")
+
+    number_safe = check_data_file(path, enable_problem_dampener=True)
+    print(f"Part 02: Data: {path} Number of Safe Reports: {number_safe}")
