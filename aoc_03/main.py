@@ -1,7 +1,3 @@
-# /// script
-# requires-python = ">=3.13"
-# dependencies = []
-# ///
 import re
 from dataclasses import dataclass
 from enum import Enum
@@ -77,12 +73,13 @@ def extract_instruction(instructions: list[str]) -> list[Instruction]:
 def calculate_instruction_result(
     path: Path,
     conditionals_enabled: bool = False,
-) -> None:
+) -> int:
     """
     Calculate the result of the corrected instruction.
 
     :param path: Path to the data file.
     :param conditionals_enabled: Enable conditionals for part 02.
+    :return: The total value of the instructions.
     """
     data = load_data(path)
     valid_instructions = get_valid_instructions(data)
@@ -111,16 +108,14 @@ def calculate_instruction_result(
             case Operation.DONT:
                 state = False
 
-    print(
-        f"Data file: {path} Total: {total} Conditionals enabled: {conditionals_enabled}"
-    )
+    return total
 
 
 if __name__ == "__main__":
-    # Part 01
-    calculate_instruction_result(Path("test_data.txt"))
-    calculate_instruction_result(Path("data.txt"))
+    path = Path("aoc_03/data.txt")
 
-    # Part 02
-    calculate_instruction_result(Path("test_data2.txt"), conditionals_enabled=True)
-    calculate_instruction_result(Path("data.txt"), conditionals_enabled=True)
+    result = calculate_instruction_result(path)
+    print(f"Part 01: Data file: {path} Total: {result}")
+
+    result = calculate_instruction_result(path, conditionals_enabled=True)
+    print(f"Part 02: Data file: {path} Total: {result}")

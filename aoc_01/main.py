@@ -1,7 +1,3 @@
-# /// script
-# requires-python = ">=3.13"
-# dependencies = []
-# ///
 from collections import Counter
 from operator import abs, sub
 from pathlib import Path
