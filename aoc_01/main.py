@@ -51,7 +51,7 @@ def load_and_find_distance(path: Path) -> int:
     Load AOC data from file and find the total distance between two lists of integers.
     """
     x, y = load_data(path)
-    print(f"Total distance for {path} = {find_total_distance(x, y)}")
+    return find_total_distance(x, y)
 
 
 def load_and_find_similarity_score(path: Path) -> int:
@@ -59,12 +59,14 @@ def load_and_find_similarity_score(path: Path) -> int:
     Load AOC data from file and find the similarity score between two lists of integers.
     """
     x, y = load_data(path)
-    print(f"Similarity score for {path} = {find_similarity_score(x, y)}")
+    return find_similarity_score(x, y)
 
 
 if __name__ == "__main__":
-    load_and_find_distance(Path("01/test_data.txt"))
-    load_and_find_distance(Path("01/data.txt"))
+    path = Path("aoc_01/data.txt")
+    distance = load_and_find_distance(path)
 
-    load_and_find_similarity_score(Path("01/test_data.txt"))
-    load_and_find_similarity_score(Path("01/data.txt"))
+    print(f"Part 01: Distance for {path} = {distance}")
+
+    similarity = load_and_find_similarity_score(path)
+    print(f"Part 02: Similarity score for {path} = {similarity}")
