@@ -112,7 +112,7 @@ def calculate_instruction_result(
 
 
 if __name__ == "__main__":
-    path = Path("aoc_03/data.txt")
+    path = Path("day_03/data.txt")
 
     result = calculate_instruction_result(path)
     print(f"Part 01: Data file: {path} Total: {result}")

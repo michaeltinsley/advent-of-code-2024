@@ -11,11 +11,11 @@ This repository uses [uv](https://github.com/astral-sh/uv).
 To run a given day's solution, use the following command:
 
 ```sh
-uv run python -m aoc_01.main
+uv run python -m day_01.main
 ```
 
 Similarly, to run the test solution for a given day, use the following command:
 
 ```sh
-uv run pytest aoc_01
+uv run pytest day_01
 ```
