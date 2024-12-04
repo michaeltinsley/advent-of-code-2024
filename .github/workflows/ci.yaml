@@ -8,9 +8,13 @@ on:
     branches:
       - main
 
+permissions:
+  checks: write
+  pull-requests: write
+
 jobs:
-  ruff:
-    name: Linting and formatting
+  ci:
+    name: Linting, formatting, and testing
     runs-on: ubuntu-latest
 
     steps:
