@@ -83,6 +83,47 @@ class WordSearchSolver:
 
         return word_count
 
+    def _is_a_center_of_diagonal_cross(self, row: int, col: int) -> bool:
+        """
+        Check if the given 'A' coordinates are the center of a valid diagonal cross
+        pattern.
+        """
+        # Ensure the position is not on the edges
+        if not (1 <= row < self.rows - 1 and 1 <= col < self.cols - 1):
+            return False
+
+        # Get diagonal characters
+        top_left = self.grid[row - 1][col - 1]
+        top_right = self.grid[row - 1][col + 1]
+        bottom_left = self.grid[row + 1][col - 1]
+        bottom_right = self.grid[row + 1][col + 1]
+
+        # Check for valid diagonal cross patterns
+        diagonal_1 = (
+            top_left + self.grid[row][col] + bottom_right
+        )  # Top-left to bottom-right
+        diagonal_2 = (
+            bottom_left + self.grid[row][col] + top_right
+        )  # Bottom-left to top-right
+
+        valid_mas = {"MAS", "SAM"}
+        return diagonal_1 in valid_mas and diagonal_2 in valid_mas
+
+    def count_x_mas_patterns(self) -> int:
+        """
+        Count all X-MAS patterns in the grid.
+        """
+        count = 0
+
+        # Check each valid center position for an X-MAS pattern
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if self.grid[row][col] == "A":
+                    if self._is_a_center_of_diagonal_cross(row, col):
+                        count += 1
+
+        return count
+
 
 def solve_xmas_word_search(path: Path) -> int:
     """
@@ -93,7 +134,20 @@ def solve_xmas_word_search(path: Path) -> int:
     return solver.count_word_occurrences("XMAS")
 
 
+def solve_x_mas_word_search(path: Path) -> int:
+    """
+    Solve the X-MAS word search problem.
+    """
+    grid = load_data(path)
+    solver = WordSearchSolver(grid)
+    return solver.count_x_mas_patterns()
+
+
 if __name__ == "__main__":
     path = Path("day_04/data.txt")
     result = solve_xmas_word_search(path)
     print(f"Part 01: Data file: {path} Total: {result}")
+
+    path = Path("day_04/data.txt")
+    result = solve_x_mas_word_search(path)
+    print(f"Part 02: Test data file: {path} Total: {result}")
