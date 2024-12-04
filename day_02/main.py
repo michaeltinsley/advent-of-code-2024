@@ -60,7 +60,7 @@ def check_data_file(path: Path, enable_problem_dampener: bool = False) -> int:
 
 
 if __name__ == "__main__":
-    path = Path("aoc_02/data.txt")
+    path = Path("day_02/data.txt")
 
     number_safe = check_data_file(path)
     print(f"Part 01: Data: {path} Number of Safe Reports: {number_safe}")
