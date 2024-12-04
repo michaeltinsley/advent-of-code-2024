@@ -8,9 +8,13 @@ on:
     branches:
       - main
 
+permissions:
+  checks: write
+  pull-requests: write
+
 jobs:
-  ruff:
-    name: Linting and formatting
+  ci:
+    name: Linting, formatting, and testing
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +31,13 @@ jobs:
 
       - name: Run Ruff linting check
         run: uv run ruff check
+
+      - name: Run Pytest
+        run: uv run pytest --junitxml=junit/test-results.xml
+
+      - name: Upload test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            junit/*.xml
