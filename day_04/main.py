@@ -10,7 +10,7 @@ def load_data(path: Path) -> list[str]:
     return data
 
 
-class WordSearchSolver:
+class StrangeWordSearchSolver:
     def __init__(self, grid: list[str]) -> None:
         """
         Initialize the word search solver with a grid.
@@ -130,7 +130,7 @@ def solve_xmas_word_search(path: Path) -> int:
     Solve the XMAS word search problem.
     """
     grid = load_data(path)
-    solver = WordSearchSolver(grid)
+    solver = StrangeWordSearchSolver(grid)
     return solver.count_word_occurrences("XMAS")
 
 
@@ -139,7 +139,7 @@ def solve_x_mas_word_search(path: Path) -> int:
     Solve the X-MAS word search problem.
     """
     grid = load_data(path)
-    solver = WordSearchSolver(grid)
+    solver = StrangeWordSearchSolver(grid)
     return solver.count_x_mas_patterns()
 
 
